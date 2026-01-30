@@ -7,30 +7,28 @@
 <body>
 
 <script>
-  const fullTitle = "visu.lol";
-  let index = 0;
-  let forward = true;
+  const text = "visu.lol";
+  let progress = 0;
+  let direction = 1;
+  const speed = 0.015; // lower = slower / smoother
 
-  function animateTitle() {
-    if (forward) {
-      index++;
-      if (index > fullTitle.length) {
-        forward = false;
-        index = fullTitle.length - 1;
-      }
-    } else {
-      index--;
-      if (index < 1) {
-        forward = true;
-        index = 1;
-      }
+  function animate() {
+    progress += direction * speed;
+
+    if (progress >= text.length) {
+      progress = text.length;
+      direction = -1;
+    }
+    if (progress <= 1) {
+      progress = 1;
+      direction = 1;
     }
 
-    document.title = fullTitle.slice(0, index);
-    setTimeout(animateTitle, 300);
+    document.title = text.slice(0, Math.floor(progress));
+    requestAnimationFrame(animate);
   }
 
-  animateTitle();
+  animate();
 </script>
 
 </body>
