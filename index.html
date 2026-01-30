@@ -1,20 +1,45 @@
-<script>
-  const text = "visu.lol";
-  const BLANK = "\u200B";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
 
-  let i = 0;
-  let dir = 1;
-  const delay = 260;
+  <!-- Make page black -->
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+    }
+  </style>
 
-  function animate() {
-    document.title = i === 0 ? BLANK : text.slice(0, i);
+  <!-- Optional: mobile browser bar black -->
+  <meta name="theme-color" content="#000000">
+</head>
+<body>
 
-    if (i === text.length) dir = -1;
-    if (i === 0) dir = 1;
+  <script>
+    const text = "visu.lol";
+    const BLANK = "\u200B";
 
-    i += dir;
-    setTimeout(animate, delay);
-  }
+    let i = 0;
+    let dir = 1;
+    const delay = 260;
 
-  animate();
-</script>
+    function animate() {
+      document.title = i === 0 ? BLANK : text.slice(0, i);
+
+      if (i === text.length) dir = -1;
+      if (i === 0) dir = 1;
+
+      i += dir;
+      setTimeout(animate, delay);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
