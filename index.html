@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>v</title>
-</head>
-<body>
-
 <script>
   const text = "visu.lol";
+  const BLANK = "\u200B";
+
   let i = 0;
   let dir = 1;
   const delay = 260;
 
   function animate() {
-    document.title = text.slice(0, i);
+    document.title = i === 0 ? BLANK : text.slice(0, i);
 
     if (i === text.length) dir = -1;
-    if (i === 1) dir = 1;
+    if (i === 0) dir = 1;
 
     i += dir;
     setTimeout(animate, delay);
@@ -24,7 +18,3 @@
 
   animate();
 </script>
-  
-</body>
-</html>
-
