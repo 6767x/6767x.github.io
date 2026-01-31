@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
 
   <!-- Discord embed (title only) -->
-  <meta property="og:title" content="visu.lol" />
+  <meta property="og:title" content="visu.lol" /> 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://visu.lol" />
+  <meta property="og:url" content="https://visu.lol" /> 
 
   <title></title>
 
-  <!-- Make page black -->
   <style>
     html, body {
       margin: 0;
@@ -18,37 +17,56 @@
       height: 100%;
       background: #000;
       color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: monospace;
+      font-size: 2rem;
     }
   </style>
 
-  <!-- Optional: mobile browser bar black -->
   <meta name="theme-color" content="#000000">
 </head>
 <body>
 
+  <!-- This is REQUIRED for your JS -->
+  <div id="typewriter"></div>
+
   <script>
-    const text = "visu.lol";
-    const BLANK = "\u200B";
+    const textElement = document.getElementById('typewriter');
 
-    let i = 0;
-    let dir = 1;
-    const delay = 260;
+    const nameOnly = "visu"; 
+    const extension = ".lol"; 
+    const fullString = nameOnly + extension;
+    const prefix = "\u200B"; 
 
-    function animate() {
-      document.title = i === 0 ? BLANK : text.slice(0, i);
+    let index = 0;
+    let isDeleting = false;
+    let typeSpeed = 200;
 
-      if (i === text.length) dir = -1;
-      if (i === 0) dir = 1;
+    function type() {
+      const currentFull = fullString.substring(0, index);
+      const currentName = currentFull.substring(0, nameOnly.length);
 
-      i += dir;
-      setTimeout(animate, delay);
+      textElement.innerHTML = prefix + currentName;
+      document.title = prefix + currentFull;
+
+      typeSpeed = isDeleting ? 100 : 200;
+
+      if (!isDeleting && index === fullString.length) {
+        isDeleting = true;
+        typeSpeed = 2000;
+      } else if (isDeleting && index === 0) {
+        isDeleting = false;
+        typeSpeed = 500;
+      }
+
+      index = isDeleting ? index - 1 : index + 1;
+      setTimeout(type, typeSpeed);
     }
 
-    animate();
+    document.addEventListener('DOMContentLoaded', type);
   </script>
 
 </body>
 </html>
-
-
-
